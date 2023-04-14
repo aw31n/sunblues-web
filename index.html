@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="//aw31n.github.io/sunblues-web/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="sunblues">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>sunblues</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = '2056565717';
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+  <style>
+    body {
+      background-color: #0A0A0A;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+    } 
+    .main-content {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 1.4s ease-out;
+    }
+    img {
+      width: 328px;
+      height: 328px;
+      position: absolute;
+    }
+
+    .loader {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      animation: animate 2.2s linear infinite;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 60%;
+      background: linear-gradient(#0000ff, #828);
+    }
+
+    .loader span:nth-child(1) {
+      filter: blur(5px);
+    }
+
+    .loader span:nth-child(2) {
+      filter: blur(10px);
+    }
+
+    .loader span:nth-child(3) {
+      filter: blur(25px);
+    }
+
+    .loader span:nth-child(4) {
+      filter: blur(50px);
+    }
+
+    .loader:after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      background: #0a0a0a;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <script>
+async function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
+    window.addEventListener('load', function(ev) {
+      var loaderContent = document.querySelector("#loader");
+      loaderContent.style.opacity = "1";
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(async function(appRunner) {
+            await delay(2400);
+            loaderContent.style.opacity = "0";
+            await delay(400);
+             await appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+  <div class="main-content" id="loader">
+    <div class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <img src="icons/logo.png" alt="Third Eye" />
+  </div>
+
+</body>
+</html>
